@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -26,7 +28,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        return view('admin.product.create', ['categories' => $categories]);
     }
 
     /**
@@ -37,7 +40,43 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:50|min:5',
+            'description' => 'required|max:300|min:10',
+            'price' => 'required|max:6|min:1',
+            'avatar' => 'mimes:jpeg,jpg,png|max:5000',
+            'img1' => 'nullable|mimes:jpeg,jpg,png|max:5000',
+            'img2' => 'nullable|mimes:jpeg,jpg,png|max:5000',
+            'img3' => 'nullable|mimes:jpeg,jpg,png|max:5000'
+        ]);
+
+        $product = new Product();
+
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->price = $request->input('price');
+        $product->category_id = $request->input('category_id');
+
+        if ($request->hasFile('avatar')) {          
+            $product->avatar = $request->file('avatar')->store('products');              
+        }
+
+        if ($request->hasFile('img1')) {          
+            $product->img1 = $request->file('img1')->store('products');              
+        }
+
+        if ($request->hasFile('img2')) {          
+            $product->img2 = $request->file('img2')->store('products');              
+        }
+
+        if ($request->hasFile('img3')) {          
+            $product->img3 = $request->file('img3')->store('products');              
+        }
+    
+        $product->save();
+
+        return redirect()->route('product.index')->with('status', 'Новый продукт добавлен!')->with('color', 'success');
+   
     }
 
     /**
@@ -48,7 +87,10 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = Product::find($id);
+        $category = Category::find($product->category_id);
+      //  dd($product);
+        return view('admin.product.show', ['product' => $product, 'category' => $category]);
     }
 
     /**
@@ -59,7 +101,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        $categories = Category::all();
+        return view('admin.product.edit', ['product' => $product, 'categories' => $categories]);
     }
 
     /**
@@ -71,7 +115,46 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:50|min:5',
+            'description' => 'required|max:300|min:10',
+            'price' => 'required|max:6|min:1',
+            'avatar' => 'mimes:jpeg,jpg,png|max:5000',
+            'img1' => 'nullable|mimes:jpeg,jpg,png|max:5000',
+            'img2' => 'nullable|mimes:jpeg,jpg,png|max:5000',
+            'img3' => 'nullable|mimes:jpeg,jpg,png|max:5000'
+        ]);
+
+        $product = new Product();
+
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->price = $request->input('price');
+        $product->category_id = $request->input('category_id');
+
+        if ($request->hasFile('avatar')) {   
+            Storage::delete($product->avatar);       
+            $product->avatar = $request->file('avatar')->store('products');              
+        }
+
+        if ($request->hasFile('img1')) {  
+            Storage::delete($product->img1);        
+            $product->img1 = $request->file('img1')->store('products');              
+        }
+
+        if ($request->hasFile('img2')) {      
+            Storage::delete($product->img2);     
+            $product->img2 = $request->file('img2')->store('products');              
+        }
+
+        if ($request->hasFile('img3')) {  
+            Storage::delete($product->img3);         
+            $product->img3 = $request->file('img3')->store('products');              
+        }
+    
+        $product->save();
+
+        return redirect()->route('product.index')->with('status', 'Продукт обнавлён!')->with('color', 'success');
     }
 
     /**
@@ -82,6 +165,22 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+
+        if($product->avatar) {
+            Storage::delete($product->avatar); 
+        }
+        if($product->img1) {
+            Storage::delete($product->img1); 
+        }
+        if($product->img2) {
+            Storage::delete($product->img2); 
+        }
+        if($product->img) {
+            Storage::delete($product->img3); 
+        }
+
+        $product->delete();
+            return redirect()->route('product.index')->with('status', 'Продукт удален!')->with('color', 'success');
     }
 }

@@ -31,7 +31,7 @@
                 <a class="nav-link" href="{{ route('category.index') }}" style="color:black">Категории</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" style="color:black">Продукты</a>
+                    <a class="nav-link" href="{{ route('product.index') }}" style="color:black">Продукты</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" style="color:black">Настройки</a>
@@ -49,7 +49,7 @@
 
             <div class="row">
                 <div class="col-12">
-                <form action="{{ route('category.store') }}" method="POST"  enctype="multipart/form-data">
+                <form action="{{ route('product.store') }}" method="POST"  enctype="multipart/form-data">
             @csrf
 
                 <div class="row mb-3">
@@ -68,9 +68,49 @@
                 </div>
 
                 <div class="row mb-3">
-                <label for="inputDescription" class="col-sm-2 col-form-label">Изображение</label>
+                  <label for="inputDescription" class="col-sm-2 col-form-label">Цена</label>
                   <div class="col-sm-10">
-                    <input type="file" class="form-control" name="img">
+                    <input type="text" class="form-control" name="price">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="inputDescription" class="col-sm-2 col-form-label">Категория</label>
+                  <div class="col-sm-10">
+                  <select name="category_id" class="form-select" aria-label="Default select example">
+                        <option selected>Выберите...</option>
+                        @foreach ($categories as $category)
+                        <option value='{{ $category->id }}'>{{ $category->name}}</option>
+                        @endforeach
+                    </select>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                <label for="inputDescription" class="col-sm-2 col-form-label">Аватар</label>
+                  <div class="col-sm-10">
+                    <input type="file" class="form-control" name="avatar">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                <label for="inputDescription" class="col-sm-2 col-form-label">Изображение 1</label>
+                  <div class="col-sm-10">
+                    <input type="file" class="form-control" name="img1">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                <label for="inputDescription" class="col-sm-2 col-form-label">Изображение 2</label>
+                  <div class="col-sm-10">
+                    <input type="file" class="form-control" name="img2">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                <label for="inputDescription" class="col-sm-2 col-form-label">Изображение 3</label>
+                  <div class="col-sm-10">
+                    <input type="file" class="form-control" name="img3">
                   </div>
                 </div>
 

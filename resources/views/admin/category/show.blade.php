@@ -31,7 +31,7 @@
                     <a class="nav-link" href="{{ route('category.index') }}" style="color:black">Категории</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('category.index') }}" style="color:black">Продукты</a>
+                    <a class="nav-link" href="{{ route('product.index') }}" style="color:black">Продукты</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" style="color:black">Настройки</a>
@@ -42,7 +42,7 @@
         <div class="col-9 mt-4">
 
             <div class="row mb-4">
-                <div class="col-10 offset-2">
+                <div class="col-10">
                     <h2>{{ $category -> name}}</h2>
                 </div>
             </div>
@@ -52,7 +52,7 @@
                     <div class="card mb-4 mt-3" style="border: none;">
                         <div class="row g-0">
                             <div class="col-md-4">
-                                <img src="{{asset( $category->img)}}" alt="img: {{ $category -> name}}">
+                                <img src="{{asset( 'storage/' . $category->img)}}" alt="img: {{ $category -> name}}" width="300" height="300">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body" style="min-height: 200px;">
@@ -60,8 +60,13 @@
                                     <p class="card-text" style="min-height: 150px;">{{ $category -> description}}</p>
                                     <p class="card-text"><small class="text-muted">Создание: {{ $category -> created_at }}</small></p>
 
-                                    <a href="{{ route('category.edit', ['category' => $category->id]) }}" type="button" class="btn btn-warning">Редактировать</a>
-                                    <a type="button" class="btn btn-danger">Удалить</a>
+                                    <form action="{{ route('category.destroy', ['category' => $category->id]) }}" method="post">
+                                        <a href="{{ route('category.edit', ['category' => $category->id]) }}" type="button" class="btn btn-warning">Редактировать</a>
+
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="submit" type="button" class="btn btn-danger" value="Удалить">
+                                    </form>
 
                                 </div>
                             </div>
@@ -81,31 +86,36 @@
             <div class="row">
 
 
-            @foreach ($products as $product)
-            
-            <div class="card mb-4 mt-3">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="..." alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body" style="min-height: 200px;">
-                        <a href="{{ route('category.show', ['category' => $category->id]) }}" style="text-decoration:none;">
-                            <h4 class="card-title">{{ $product -> name}}</h4>
-                        </a>
-                            <p class="card-text" style="min-height: 150px;">{{ $product -> description}}</p>
-                            <h5>Цена: {{ $product -> price }} р.</h5>
-                            <p class="card-text"><small class="text-muted">Создание: {{$product -> created_at }}</small></p>
-                        
-                                <a type="button" class="btn btn-warning">Редактировать</a>
-                                <a type="button" class="btn btn-danger">Удалить</a>
+                @foreach ($products as $product)
 
+                <div class="card mb-4 mt-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="..." alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body" style="min-height: 200px;">
+                                <a href="{{ route('category.show', ['category' => $category->id]) }}" style="text-decoration:none;">
+                                    <h4 class="card-title">{{ $product -> name}}</h4>
+                                </a>
+                                <p class="card-text" style="min-height: 150px;">{{ $product -> description}}</p>
+                                <h5>Цена: {{ $product -> price }} р.</h5>
+                                <p class="card-text"><small class="text-muted">Создание: {{$product -> created_at }}</small></p>
+
+                                <form action="{{ route('product.destroy', ['product' => $product->id]) }}" method="post">
+                                    <a href="{{ route('category.edit', ['product' => $product->id]) }}" type="button" class="btn btn-warning">Редактировать</a>
+
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="submit" type="button" class="btn btn-danger" value="Удалить">
+                                </form>
+
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            @endforeach
+
+                @endforeach
 
 
 

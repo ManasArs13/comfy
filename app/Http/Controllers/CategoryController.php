@@ -58,7 +58,7 @@ class CategoryController extends Controller
         
         $category->save();
 
-        return redirect()->route('category.index');
+        return redirect()->route('category.index')->with('status', 'Новая категория добавлена!')->with('color', 'success');
     }
 
     /**
@@ -84,7 +84,6 @@ class CategoryController extends Controller
     public function edit($id)
     {
          $category = Category::find($id);
-
          return view('admin.category.edit', [ 'category' => $category ]);
     }
 
@@ -116,7 +115,7 @@ class CategoryController extends Controller
 
         $category->save();
 
-        return redirect()->route('category.index');
+        return redirect()->route('category.index')->with('status', 'Категория обновлена!')->with('color', 'succes');
     }
 
     /**
@@ -132,14 +131,17 @@ class CategoryController extends Controller
         
         if (count($posts) == 0) {
 
-            Storage::delete($category->img);
+            if($category->img) {
+                Storage::delete($category->img); 
+            }
+
             $category->delete();
 
-            return redirect()->route('category.index');
+            return redirect()->route('category.index')->with('status', 'Категория удалена!')->with('color', 'success');
             
         } else {
             
-            return redirect()->route('category.index');
+            return redirect()->route('category.index')->with('status', 'В категории есть продукты! удалите сначала их')->with('color', 'warning');
         }
     }
 }

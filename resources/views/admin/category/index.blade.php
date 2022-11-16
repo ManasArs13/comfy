@@ -31,7 +31,7 @@
                     <a class="nav-link" href="{{ route('category.index') }}" style="color:black">Категории</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" style="color:black">Продукты</a>
+                    <a class="nav-link" href="{{ route('product.index') }}" style="color:black">Продукты</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" style="color:black">Настройки</a>
@@ -51,15 +51,23 @@
                 </div>
             </div>
 
+            <div class="row">
+                @if (session('status'))
+                <div class="alert alert-{{ session('color') }} alert-dismissible mt-2" role="alert">
+                    {{ session('status') }}
+                </div>
+                @endif
+            </div>
+
             @foreach ($categories as $category)
 
             <div class="card mb-4 mt-3">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <img src="{{asset( 'storage/'.$category->img)}}" alt="img: {{ $category -> name}}">
+                        <img src="{{asset( 'storage/'.$category->img)}}" alt="img: {{ $category -> name}}" width="300" height="300">
                     </div>
                     <div class="col-md-8">
-                        
+
                         <div class="card-body" style="min-height: 200px;">
                             <a href="{{ route('category.show', ['category' => $category->id]) }}" style="text-decoration:none;">
                                 <h4 class="card-title">{{ $category -> name}}</h4>

@@ -31,7 +31,7 @@
                 <a class="nav-link" href="{{ route('category.index') }}" style="color:black">Категории</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" style="color:black">Продукты</a>
+                    <a class="nav-link" href="{{ route('product.index') }}" style="color:black">Продукты</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" style="color:black">Настройки</a>
@@ -49,14 +49,13 @@
 
             <div class="row">
                 <div class="col-12">
-                <form action="{{ route('category.update', ['category' => $category->id] ) }}" method="POST"  enctype="multipart/form-data">
+                <form action="{{ route('product.store') }}" method="POST"  enctype="multipart/form-data">
             @csrf
-            @method('PUT')
 
                 <div class="row mb-3">
                   <label for="inputName" class="col-sm-2 col-form-label">Название</label>
                   <div class="col-sm-10">
-                    <input type="text" value="{{ $category -> name }}" id="inputName" class="form-control" name="name" required>
+                    <input type="text" value="{{ $product->name }}" id="inputName" class="form-control" name="name" required>
                   </div>
                 </div>
 
@@ -64,20 +63,60 @@
                 <div class="row mb-3">
                   <label for="inputDescription" class="col-sm-2 col-form-label">Описание</label>
                   <div class="col-sm-10">
-                    <input style="min-height:150px" type="text" value="{{ $category -> description }}" class="form-control" name="description">
+                    <input style="min-height:150px" value="{{ $product->description }}" type="text" class="form-control" name="description">
                   </div>
                 </div>
 
                 <div class="row mb-3">
-                <label for="inputDescription" class="col-sm-2 col-form-label">Изображение</label>
+                  <label for="inputDescription" class="col-sm-2 col-form-label">Цена</label>
                   <div class="col-sm-10">
-                    <input type="file" class="form-control" name="img">
+                    <input value="{{ $product->price }}" type="text" class="form-control" name="price">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="inputDescription" class="col-sm-2 col-form-label">Категория</label>
+                  <div class="col-sm-10">
+                  <select name="category_id" class="form-select" aria-label="Default select example">
+                        <option selected>Выберите...</option>
+                        @foreach ($categories as $category)
+                        <option value='{{ $category->id }}'>{{ $category->name}}</option>
+                        @endforeach
+                    </select>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                <label for="inputDescription" class="col-sm-2 col-form-label">Аватар</label>
+                  <div class="col-sm-10">
+                    <input type="file" class="form-control" name="avatar">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                <label for="inputDescription" class="col-sm-2 col-form-label">Изображение 1</label>
+                  <div class="col-sm-10">
+                    <input type="file" class="form-control" name="img1">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                <label for="inputDescription" class="col-sm-2 col-form-label">Изображение 2</label>
+                  <div class="col-sm-10">
+                    <input type="file" class="form-control" name="img2">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                <label for="inputDescription" class="col-sm-2 col-form-label">Изображение 3</label>
+                  <div class="col-sm-10">
+                    <input type="file" class="form-control" name="img3">
                   </div>
                 </div>
 
                 <div class="row mb-3">
                     <div class="col-10 offset-2">
-                        <button style="width:100%;" type="submit" class="btn btn-warning">Обновить</button>
+                        <button   style="width:100%;" type="submit" class="btn btn-success">Сохранить</button>
                     </div>
                 
                 </div>

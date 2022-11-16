@@ -31,7 +31,7 @@
                     <a class="nav-link" href="{{ route('category.index') }}" style="color:black">Категории</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" style="color:black">Продукты</a>
+                    <a class="nav-link" href="{{ route('product.index') }}" style="color:black">Продукты</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" style="color:black">Настройки</a>
@@ -46,7 +46,7 @@
                 </div>
                 <div class="col-8" style="text-align: right;">
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <a href="{{ route('category.create') }}" type="button" class="btn btn-success">Добавить</a>
+                        <a href="{{ route('product.create') }}" type="button" class="btn btn-success">Добавить</a>
                     </div>
                 </div>
             </div>
@@ -56,19 +56,38 @@
             <div class="card mb-4 mt-3">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <img src="..." alt="...">
+                        <img src="{{asset( 'storage/'.$product->avatar)}}" alt="{{ $product->avatar }}" width="300" height="300">
                     </div>
                     <div class="col-md-8">
-                        <div class="card-body" style="min-height: 200px;">
+                        <div class="card-body" style="min-height: 250px;">
                         <a href="{{ route('product.show', ['product' => $product->id]) }}" style="text-decoration:none;">
                             <h4 class="card-title">{{ $product -> name}}</h4>
                         </a>
-                            <p class="card-text" style="min-height: 150px;">{{ $product -> description}}</p>
+                            <p class="card-text">{{ $product -> description}}</p>
                             <h5>Цена: {{ $product -> price }} р.</h5>
-                            <p class="card-text"><small class="text-muted">Создание: {{$product -> created_at }}</small></p>
+
+
+                            @if ($product->img1)
+                            <img src="{{asset( 'storage/'.$product->img1)}}" alt="{{ $product->img1 }}" width="100" height="100">
+                            @endif
+                            
+                            @if ($product->img2)
+                            <img src="{{asset( 'storage/'.$product->img2)}}" alt="{{ $product->img2 }}" width="100" height="100">
+                            @endif
+
+                            @if ($product->img1)
+                            <img src="{{asset( 'storage/'.$product->img3)}}" alt="{{ $product->img3 }}" width="100" height="100">
+                            @endif
+                          
+                            <p class="card-text mt-3"><small class="text-muted">Создание: {{ $product -> created_at }}</small></p>
                         
-                                <a type="button" class="btn btn-warning">Редактировать</a>
-                                <a type="button" class="btn btn-danger">Удалить</a>
+                                <form action="{{ route('product.destroy', ['product' => $product->id]) }}" method="post">
+                                    <a href="{{ route('product.edit', ['product' => $product->id]) }}" type="button" class="btn btn-warning">Редактировать</a>
+
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="submit" type="button" class="btn btn-danger" value="Удалить">
+                                </form>
 
                         </div>
                     </div>

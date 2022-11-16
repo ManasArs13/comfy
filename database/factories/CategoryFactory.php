@@ -18,8 +18,8 @@ class CategoryFactory extends Factory
     public function definition()
     {
         return [
-            'name' => Str::random(15),
-            'description' => Str::random(50),
+            'name' => Str::random(50),
+            'description' => Str::random(300),
             'img' => 'dir/category.png'
         ];
     }

@@ -41,7 +41,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|max:50|min:5',
+            'name' => 'required|max:150|min:5',
             'description' => 'required|max:300|min:10',
             'price' => 'required|max:6|min:1',
             'avatar' => 'mimes:jpeg,jpg,png|max:5000',
@@ -116,7 +116,7 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'name' => 'required|max:50|min:5',
+            'name' => 'required|max:150|min:5',
             'description' => 'required|max:300|min:10',
             'price' => 'required|max:6|min:1',
             'avatar' => 'mimes:jpeg,jpg,png|max:5000',
@@ -125,7 +125,7 @@ class ProductController extends Controller
             'img3' => 'nullable|mimes:jpeg,jpg,png|max:5000'
         ]);
 
-        $product = new Product();
+        $product = Product::find($id);
 
         $product->name = $request->input('name');
         $product->description = $request->input('description');

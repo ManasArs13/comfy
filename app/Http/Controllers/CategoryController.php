@@ -40,7 +40,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|max:50|min:5',
+            'name' => 'required|max:150|min:5',
             'description' => 'nullable|max:300|min:10',
             'img' => 'mimes:jpeg,jpg,png|max:5000'
         ]);
@@ -97,7 +97,7 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
        $validated = $request->validate([
-            'name' => 'required|max:50|min:5',
+            'name' => 'required|max:150|min:5',
             'description' => 'nullable|max:300|min:10',
             'img' => 'mimes:jpeg,jpg,png|max:5000'
        ]);

@@ -24,7 +24,9 @@ return new class extends Migration
             $table->string('img2')->nullable();
             $table->string('img3')->nullable();
             $table->integer('price');
-            $table->foreignId('category_id')->constrained('categories');
+
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

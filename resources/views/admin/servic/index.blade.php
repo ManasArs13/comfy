@@ -17,24 +17,16 @@
         </div>
       </div>
 
-      <!-- <div class="row">
-        @if ($errors->any())
-        <div class="alert alert-danger">
-          <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-          </ul>
+      <div class="row">
+        @if (session('status'))
+        <div class="alert alert-{{ session('color') }} alert-dismissible mt-2" role="alert">
+          {{ session('status') }}
         </div>
         @endif
-      </div> -->
-
-
-
+      </div>
 
       <div class="row">
         <div class="col-12">
-
           <div class="card mb-4 mt-3">
             <div class="row g-0">
 
@@ -42,7 +34,6 @@
                 <div class="card-body" style="min-height: 250px;">
                   <h5 class="card-title mt-3">адрес: {{ $servic -> adres}}</h4>
                     <h5 class="card-title mt-3">телефон: {{ $servic -> phone}}</h4>
-
 
                       <div class="row mt-3">
                         @if ($servic->img1)

@@ -1,0 +1,69 @@
+img.small-rotate2 {
+    -webkit-transition: all 1s ease;
+            transition: all 1s ease;
+  }
+  img.small-rotate2:hover {
+    -webkit-transform: rotate(15deg); /* Градусы поворота можно изменить по необходимости */
+            transform: rotate(15deg); /* Градусы поворота можно изменить по необходимости */
+  }
+  
+  img.small-rotate4 {
+    -webkit-transition: all 1s ease;
+            transition: all 1s ease;
+  }
+  img.small-rotate4:hover {
+    -webkit-transform: rotate(13deg); /* Градусы поворота можно изменить по необходимости */
+            transform: rotate(13deg); /* Градусы поворота можно изменить по необходимости */
+  }
+  
+  img.small-rotate1 {
+    -webkit-transition: all 1s ease;
+            transition: all 1s ease;
+  }
+  img.small-rotate1:hover {
+    -webkit-transform: rotate(15deg); /* Градусы поворота можно изменить по необходимости */
+            transform: rotate(15deg); /* Градусы поворота можно изменить по необходимости */
+  }
+  
+  .hover-image-scale {/*  display: inline-block; */overflow: hidden; /* Скрываем всё за контуром */}
+  .hover-image-scale img {
+    transition: 1s; /* Время эффекта */
+    display: block; 
+  }
+  .hover-image-scale img:hover {
+    transform: scale(1.2); /* Увеличиваем масштаб */
+  }
+  
+  .tekst_sverhu_kartinki {
+      position: absolute;
+      top: 5%;
+      left: 5%;
+      text-transform: uppercase;
+      color: white;
+      padding: 10px;
+      font-size: 25px;
+      font-family: 'Open Sans',Arial,sans-serif;
+      font-weight: 600;
+      z-index: 1;
+      text-align: left;
+  }
+  .tekst_snizu_kartinki {
+      position: absolute;
+      top: 80%;
+      left: 10%;
+      color: white;
+      padding: 10px;
+      font-size: 16px;
+      font-family: 'Open Sans',Arial,sans-serif;
+      font-weight: 500;
+      z-index: 1;
+      text-align: left;
+  }
+
+  footer {
+    margin-top: 30px;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    border-top: 1px solid #ddd;
+    color: #494949;
+}

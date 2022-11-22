@@ -19,8 +19,10 @@ class OrderFactory extends Factory
     {
         return [
             'name'=> fake()->name(),
-            'phone'=> 89997772233,
-            'adress'=> Str::random(20)
+            'phone'=> Str::random(20),
+            'adres'=> Str::random(20),
+            'email'=> fake()->email(),
+            'product_id' => 1
         ];
     }
 }

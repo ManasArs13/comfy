@@ -16,10 +16,14 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('name');
-            $table->integer('phone');
-            $table->string('adress')->nullable();
-            $table->foreignId('product_id')->constrained('products');
+            $table->string('name', 150);
+            $table->string('phone', 20);
+            $table->string('email');
+            $table->string('adres', 300)->nullable();
+            $table->boolean('completed')->default(false);
+           
+            $table->unsignedBigInteger('product_id');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
 

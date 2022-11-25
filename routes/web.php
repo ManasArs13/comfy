@@ -34,17 +34,17 @@ Route::post('/order', [OrderController::class, 'store'])->name('order.store');
 
 
 # Администрирование
-Route::get('/admin', [OrderController::class, 'admin'])->name('admin');
+Route::get('/admin', [OrderController::class, 'admin'])->middleware(['auth', 'verified'])->name('admin');
 
-Route::resource('/admin/category', CategoryController::class);
-Route::resource('/admin/product', ProductController::class);
-Route::resource('/admin/servic', ServicController::class);
+Route::resource('/admin/category', CategoryController::class)->middleware(['auth', 'verified']);
+Route::resource('/admin/product', ProductController::class)->middleware(['auth', 'verified']);
+//Route::resource('/admin/servic', ServicController::class)->middleware(['auth', 'verified']);
 
-Route::get('admin/complete/order/{id}', [OrderController::class, 'orderComplete'])->name('complete');
-Route::get('admin/delete/order/{id}', [OrderController::class, 'orderReturn'])->name('return');
-
+Route::get('admin/complete/order/{id}', [OrderController::class, 'orderComplete'])->middleware(['auth', 'verified'])->name('complete');
+Route::get('admin/delete/order/{id}', [OrderController::class, 'orderReturn'])->middleware(['auth', 'verified'])->name('return');
+/*
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
+*/
 require __DIR__.'/auth.php';

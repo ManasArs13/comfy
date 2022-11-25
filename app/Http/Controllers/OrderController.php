@@ -7,34 +7,28 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
-use App\Models\Servic;
 
 class OrderController extends Controller
 {
-    public function admin () {
-        
+    public function admin()
+    {
         $orders = Order::with('product')->where('completed', false)->get();
         $completed = Order::with('product')->where('completed', true)->get();
-
         return view('admin.home', ['orders' => $orders, 'completed' => $completed]);
-
     }
 
 
 
-    public function order ($id)
-    {   
-        $servic = Servic::find(1);
+    public function order($id)
+    {
         $product = Product::find($id);
         $categories = Category::all();
 
-
-        return view ('pages.order', ['servic' => $servic, 'product' => $product, 'categories' => $categories]);
-
+        return view('pages.order', ['product' => $product, 'categories' => $categories]);
     }
 
-    public function store (Request $request) {
-
+    public function store(Request $request)
+    {
         $validate = $request->validate([
             'name' => 'required|max:150|min:5|string',
             'email' => 'required|max:150|min:5|string',
@@ -53,14 +47,15 @@ class OrderController extends Controller
         if ($request->input('adres')) {
             $order->adres = $request->input('adres');
         }
-        
+
         $order->save();
 
         return redirect()->route('home')->with('status', 'Ваша заявка отправлена. Ожидайте звонка специалиста');
     }
 
-    public function orderComplete ($id) {
-        
+    public function orderComplete($id)
+    {
+
         $order = Order::find($id);
         $order->completed = true;
         $order->save();
@@ -68,13 +63,12 @@ class OrderController extends Controller
         return redirect()->route('admin')->with('status', 'Заказ закрыт');
     }
 
-    public function orderReturn ($id) {
-
+    public function orderReturn($id)
+    {
         $order = Order::find($id);
         $order->completed = false;
         $order->save();
 
         return redirect()->route('admin')->with('status', 'Статус заказа открыт');
     }
-
 }

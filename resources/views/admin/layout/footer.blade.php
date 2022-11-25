@@ -6,7 +6,10 @@
                     <a href="{{ route('home')}}" type="button" class="btn btn-warning">Перейти на основной сайт</a>
                 </div>
                 <div class="btn-group m-1" role="group" aria-label="Basic example">
-                    <a href="#" type="button" class="btn btn-danger">ВЫХОД</a>
+                <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                    <button type="submit" class="btn btn-danger">ВЫХОД</a>
+                    </form>
                 </div>
             </div>
         </nav>

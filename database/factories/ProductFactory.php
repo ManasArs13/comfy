@@ -21,10 +21,6 @@ class ProductFactory extends Factory
             'name' => Str::random(50),
             'description' => Str::random(500),
             'price'=> 400,
-            'avatar' => Str::random(10),
-            'img1' => Str::random(10),
-            'img2' => Str::random(10),
-            'img3' => Str::random(10),
         ];
     }
 }

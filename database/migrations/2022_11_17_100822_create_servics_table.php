@@ -12,7 +12,7 @@ return new class extends Migration
      * @return void
      */
     public function up()
-    {
+    {/*
         Schema::create('servics', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('img1');
             $table->string('img2')->nullable();
             $table->string('img3')->nullable();
-        });
+        });*/
     }
 
     /**

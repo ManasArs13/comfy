@@ -70,7 +70,6 @@ class DatabaseSeeder extends Seeder
                     'category_id' => 2,
                     'avatar' => 'products/3avatar.jpeg',
                     'img1' => 'products/3img1.jpeg',
-                    'img2' => 'products/3img2.jpeg',
                 ]);
 
                 \App\Models\Product::factory()
@@ -81,7 +80,6 @@ class DatabaseSeeder extends Seeder
                     'category_id' => 2,
                     'avatar' => 'products/4avatar.jpeg',
                     'img1' => 'products/4img1.jpeg',
-                    'img2' => 'products/4img2.jpeg',
                 ]);
 
  #Категори3                
@@ -151,12 +149,13 @@ class DatabaseSeeder extends Seeder
              
 
                 \App\Models\User::factory()->create([
-                    'name' => 'Test User',
-                    'email' => 'test@example.com',
+                    'name' => 'Admin',
+                    'email' => 'arsen@email.com',
+                    'password' => bcrypt('secret'),
                 ]);
         
 
-            \App\Models\Servic::factory()->create();
+  //          \App\Models\Servic::factory()->create();
 
 
              \App\Models\Order::factory(2)->create([

@@ -9,28 +9,39 @@ var img3 = document.getElementById('myImg3');
 
 var modalImg = document.getElementById("img01");
 var captionText = document.getElementById("caption");
-img.onclick = function(){
+
+
+if (img !== null) {
+    img.onclick = function(){
     modal.style.display = "block";
     modalImg.src = this.src;
     captionText.innerHTML = this.alt;
+    }
 }
 
-img1.onclick = function(){
+if (img1 !== null) {
+    img1.onclick = function(){
     modal.style.display = "block";
     modalImg.src = this.src;
     captionText.innerHTML = this.alt;
+    }
 }
 
-img2.onclick = function(){
+if (img2 !== null) {
+    console.log('f')
+    img2.onclick = function(){
     modal.style.display = "block";
     modalImg.src = this.src;
     captionText.innerHTML = this.alt;
+    }
 }
 
-img3.onclick = function(){
+if (img3 !== null) {
+    img3.onclick = function(){
     modal.style.display = "block";
     modalImg.src = this.src;
     captionText.innerHTML = this.alt;
+    }
 }
 
 // Get the <span> element that closes the modal

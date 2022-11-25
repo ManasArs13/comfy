@@ -3,64 +3,49 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\Order;
 use App\Models\Product;
-use App\Models\Servic;
 
 class HomeController extends Controller
 {
-    public function home () {
-
-        $servic = Servic::find(1);
+    public function home()
+    {
         $categories = Category::all();
 
-        return view('pages.home', ['servic' => $servic, 'categories' => $categories]);
+        return view('pages.home', ['categories' => $categories]);
     }
 
-    public function about () {
-
-        $servic = Servic::find(1);
-       
-        return view('pages.about', ['servic' => $servic]);
+    public function about()
+    {
+        return view('pages.about');
     }
 
 
 
-    public function catalog ($id) {
-
-        $servic = Servic::find(1);
+    public function catalog($id)
+    {
         $categories = Category::all();
 
-        if ( $id == 'all') {
+        if ($id == 'all') {
             $products = Product::all();
             $title = 'Все продукты';
         } else {
             $category = Category::find($id);
             $products = $category->products;
             $title = $category->name;
-        }   
+        }
 
-        return view('pages.catalog', ['servic' => $servic, 'categories' => $categories, 'products' => $products, 'title' => $title]);
+        return view('pages.catalog', ['categories' => $categories, 'products' => $products, 'title' => $title]);
     }
 
 
 
-    public function product ($id) {
-
-        $servic = Servic::find(1);
+    public function product($id)
+    {
         $categories = Category::all();
 
         $product = Product::find($id);
         $category = Category::find($product->category_id);
 
-        return view('pages.product', ['servic' => $servic, 'product' => $product, 'category' => $category, 'categories' => $categories]);
+        return view('pages.product', ['product' => $product, 'category' => $category, 'categories' => $categories]);
     }
-
-
-
-
-
-
-    
-
 }

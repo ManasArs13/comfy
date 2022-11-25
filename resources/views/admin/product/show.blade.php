@@ -1,22 +1,15 @@
 @extends('admin.app')
-
 @section('content')
-
 @include('admin.layout.header')
-
 <div class="container">
     <div class="row mt-4">
-
-@include('admin.layout.navi')
-
+        @include('admin.layout.navi')
         <div class="col-9 mt-4">
-
             <div class="row mb-4">
                 <div class="col-10">
                     <h2>{{ $product -> name}}</h2>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-12">
                     <div class="card mb-4 mt-3" style="border: none;">
@@ -33,7 +26,7 @@
                                     @if ($product->img1)
                                     <img src="{{asset( 'storage/'.$product->img1)}}" alt="{{ $product->img1 }}" width="100" height="100">
                                     @endif
-                                    
+
                                     @if ($product->img2)
                                     <img src="{{asset( 'storage/'.$product->img2)}}" alt="{{ $product->img2 }}" width="100" height="100">
                                     @endif
@@ -46,24 +39,18 @@
                                     <p class="card-text"><small class="text-muted">Создание: {{ $product -> created_at }}</small></p>
 
                                     <form action="{{ route('product.destroy', ['product' => $product->id]) }}" method="post">
-                                    <a href="{{ route('product.edit', ['product' => $product->id]) }}" type="button" class="btn btn-warning">Редактировать</a>
+                                        <a href="{{ route('product.edit', ['product' => $product->id]) }}" type="button" class="btn btn-warning">Редактировать</a>
 
-                                    @csrf
-                                    @method('DELETE')
-                                    <input type="submit" type="button" class="btn btn-danger" value="Удалить">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="submit" type="button" class="btn btn-danger" value="Удалить">
                                     </form>
-
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
             </div>
-
-           
-
         </div>
     </div>
 </div>

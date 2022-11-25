@@ -41,9 +41,9 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|max:150|min:5',
-            'description' => 'required|max:300|min:10',
-            'price' => 'required|max:6|min:1',
+            'name' => 'required|max:150|min:5|string',
+            'description' => 'required|max:300|min:10|string',
+            'price' => 'required|max:6|min:1|integer',
             'avatar' => 'mimes:jpeg,jpg,png|max:5000',
             'img1' => 'nullable|mimes:jpeg,jpg,png|max:5000',
             'img2' => 'nullable|mimes:jpeg,jpg,png|max:5000',
@@ -89,7 +89,7 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $category = Category::find($product->category_id);
-      //  dd($product);
+    
         return view('admin.product.show', ['product' => $product, 'category' => $category]);
     }
 
